@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-3.1.1.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/jquery-3.1.1.js"></script>
+</head>
+<body>
+<div id="calculator">
+    <!--头部-->
+    <div id="cal_hd">
+        <h2>欢迎使用我的亲戚关系计算器！</h2>
+    </div>
+    <!--屏幕展示-->
+    <div id="cal_screen">
+        <input id="screen_hd" value="">
+        <input id="screen_ft" value="">
+    </div>
+    <!--选择性别-->
+    <div id="sex">
+        <span>男</span>
+        <div id="div1" class="open1">
+                <div id="div2" class="open2"></div>
+        </div>
+        <span style="margin-left: 46px">女</span>
+    </div>
+    <!--按钮部分-->
+    <div id="btn_box">
+        <input type="button" value="C" id="clearall">
+        <input type="button" value="&larr;" id="back">
+        <input name="妈妈" data-sex="nv" type="button" value="母" class="buttons">
+        <input name="爸爸" data-sex="nan" type="button" value="父" class="buttons">
+        <input name="老婆" data-sex="nv" type="button" value="妻" class="buttons" id="wife">
+        <input name="老公" data-sex="nan" type="button" value="夫" class="buttons" id="husband">
+        <input name="姐姐" data-sex="nv" type="button" value="姐" class="buttons">
+        <input name="哥哥" data-sex="nan" type="button" value="兄" class="buttons">
+        <input type="button" value="=" id="deng">
+        <input type="button" value="⇌" id="exchange">
+        <input name="妹妹" data-sex="nv" type="button" value="妹" class="buttons">
+        <input name="弟弟" data-sex="nan" type="button" value="弟" class="buttons">
+        <input type="button" value="？" id="help">
+        <input name="女儿" data-sex="nv" type="button" value="女" class="buttons">
+        <input name="儿子" data-sex="nan" type="button" value="子" class="buttons">
+    </div>
+    <!--尾部-->
+    <div id="cal_ft">
+        madeBy@Jionghui Li
+        <a href="">联系方式</a>
+    </div>
+
+</div>
+</body>
+</html>

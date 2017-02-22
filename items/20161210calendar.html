@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日历练习</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            border: 0;
+            list-style: none;
+        }
+        body{
+            font-family:"微软雅黑";
+        }
+        s, i, em {
+            font-style: normal;
+            text-decoration: none;
+        }
+        #calendar{
+            width: 350px;
+            height: 640px;
+            margin: 10px auto 0;
+            border: 5px solid #000;
+        }
+        #selectcal{
+            width: 350px;
+            height: 190px;
+            background: skyblue;
+            line-height: 30px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        #selectcal input{
+            width: 200px;
+            height: 30px;
+            margin: 5px 0;
+            font-size: 18px;
+            color:#000;
+        }
+        #send{
+            width: 150px;
+            height: 34px;
+            margin: 2px 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #calhd{
+            width: 100%;
+            height: 50px;
+            background:#BA55D3;
+            line-height: 50px;
+            color: #ffffff;
+        }
+        #calhd strong{
+            display:block;
+            width: auto;
+            height: 50px;
+            font-size: 28px;
+            line-height: 50px;
+            float: left;
+        }
+        #yue{
+            width: 80px;
+            height: 50px;
+            font-size: 28px;
+            margin-left: 15px;
+        }
+        #yueem{
+            font-size: 22px;
+        }
+        #calhd small{
+            display:block;
+            float: left;
+            margin-left: 10px;
+            font-size: 14px;
+            width: 50px;
+            height: 50px;
+        }
+        #p1{
+            display: block;
+            width: 100%;
+            height: 18px;
+            line-height: 20px;
+            padding-top: 8px;
+        }
+        #p2{
+            display: block;
+            width: 100%;
+            height: 25px;
+            line-height: 25px;
+        }
+        #calbd{
+            width: 100%;
+            height: 50px;
+            background: #BA55D3;
+            box-sizing: border-box;
+            border-bottom: 2px solid #000;
+            line-height: 50px;
+        }
+        #calbd span{
+            display: inline-block;
+            width: 13.1%;
+            text-align: center;
+            color:#fff;
+        }
+        #calft{
+            width: 100%;
+            height: 300px;
+        }
+        #fttable{
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        #fttable tr{
+            height: 50px;
+            line-height: 50px;
+        }
+        #fttable td{
+            width: 13.1%;
+            color:#BA55D3;
+            font-size: 20px;
+        }
+        #biaoji{
+            width: 100%;
+            height: 50px;
+        }
+        #biaoji span{
+            text-align: center;
+            display: inline-block;
+            width: 49%;
+            line-height: 50px;
+        }
+        #biaoji span em{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            position: relative;
+            margin-right: 5px;
+            top: 8px;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            function $(tag) {
+                return document.getElementById(tag);
+            }
+            var calhd=$('calhd');
+            var yue=$('yue');
+            var p1=$('p1');
+            var p2=$('p2');
+            var calft=$('calft');
+
+            var send=$('send');
+            var inp1=$('inp1');
+            var inp2=$('inp2');
+            var inp3=$('inp3');
+
+
+            //获取当时的年月日
+            var starD=new Date();
+            var stary=starD.getFullYear();//年
+            var starmonth=starD.getMonth();//月
+            var starday=starD.getDate();//日
+            var starw=starD.getDay();//星期几
+
+            var tian=function () {
+                var firstday = new Date(stary,starmonth, 1);//获取当天月第一天
+//                var weekfirstday=firstday.getDay();
+                var lastday=new Date(stary,starmonth+1, 0);//获取最后一天
+//            alert(lastday.getDate());
+                var lastnum=lastday.getDate();
+
+                //开始填内容
+                yue.innerHTML=(starmonth+1);
+                starw==0?p1.innerHTML='周日':p1.innerHTML='周'+starw;
+                p2.innerHTML=stary+'年';
+                //填日数
+                var fthtml='';
+                for(var i=0;i<6;i++){
+                    fthtml+='<tr>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '</tr>';
+                }
+                calft.innerHTML='<table id="fttable">'+fthtml+'</table>';
+                var tds=document.getElementsByTagName('td');
+                for (i=0;i<tds.length;i++){
+                    var thisday=new Date(stary,starmonth,i+1-firstday.getDay());
+                    tds[i].innerText=thisday.getDate();
+                    var num=i+1-firstday.getDay();
+//                alert(num)
+                    if (num<=0 || num>lastnum){
+                        tds[i].style.color='#ccc';
+                    }
+                    if (num==starday){
+                        tds[i].style.color='#fff';
+                        tds[i].style['border-radius']='50%';
+                        tds[i].style.background='orange';
+                    }
+                }
+            };
+            tian();
+
+            //按钮事件
+            send.onclick=function () {
+
+
+                stary=inp1.value;
+                starmonth=inp2.value-1;
+                starday=inp3.value;
+                var onclickdata=new Date(stary,starmonth,starday);
+                starw=onclickdata.getDay();
+                tian();
+
+            }
+
+        }
+    </script>
+</head>
+<body>
+<div id="calendar">
+    <div id="selectcal">
+        <h2>你也可以选择你喜欢的那天哦！</h2>
+        <div id="selectin">
+            年：<input type="text" value="" id="inp1"><br>
+            月：<input type="text" value="" id="inp2"><br>
+            日：<input type="text" value="" id="inp3"><br>
+        </div>
+        <button id="send">确定</button>
+    </div>
+    <div id="calhd">
+        <strong>
+            <em id="yue"></em><em id="yueem">月</em>
+        </strong>
+        <small>
+            <em id="p1"></em>
+            <em id="p2"></em>
+        </small>
+    </div>
+    <div id="calbd">
+        <span>日</span>
+        <span>一</span>
+        <span>二</span>
+        <span>三</span>
+        <span>四</span>
+        <span>五</span>
+        <span>六</span>
+    </div>
+    <div id="calft">
+
+    </div>
+    <div id="biaoji">
+        <span><em style="background: orange"></em>当前日</span>
+        <span><em style="background: skyblue"></em>标记日</span>
+    </div>
+</div>
+</body>
+</html>

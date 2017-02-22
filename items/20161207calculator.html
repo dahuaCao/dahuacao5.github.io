@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>12.计算器</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            border: 0;
+            list-style: none;
+        }
+        body{
+            font-family:"微软雅黑";
+        }
+        #box{
+            width: 400px;
+            height: 500px;
+            padding: 10px;
+            margin: 50px auto;
+            background: #cccccc;
+        }
+        #box_hd{
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            position: relative;
+        }
+        #box_hd #div1{
+            width: 68px;
+            height: 40px;
+            border-radius: 320px;
+            position:absolute;
+            right: 0;
+            top: 8px;
+        }
+        #box_hd #div2{
+            width: 41px;
+            height: 41px;
+            border-radius: 19px;
+            position: absolute;
+            top: -1px;
+            background: white;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+        }
+        #box_hd .open1{
+            background: rgba(0,184,0,0.8);
+        }
+        #box_hd .open2{
+            top: 2px;
+            right: 1px;
+        }
+        #box_hd .close1{
+            background: rgba(255,255,255,0.4);
+            border:1px solid rgba(0,0,0,0.15);
+            border-left: transparent;
+        }
+        #box_hd .close2{
+            left: 0;
+            top: 0;
+            border:1px solid rgba(0,0,0,0.1);
+        }
+        #cal_screen{
+            width: 100%;
+            height: 60px;
+            margin: 20px 0 ;
+        }
+        #screen_hd{
+            width: 100%;
+            height: 20px;
+            font-size: 16px;
+            background: orange;
+            text-align: right;
+            line-height: 20px;
+            padding-right: 20px;
+            box-sizing: border-box;
+        }
+        #screen_ft{
+            width: 100%;
+            height: 40px;
+            font-size: 30px;
+            text-align: right;
+            line-height: 40px;
+            padding-right: 20px;
+            box-sizing: border-box;
+            background: #fff;
+        }
+        #box_btn{
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+        }
+        #box_btn input{
+            width: 80px;
+            height: 50px;
+            background:	#008080;
+            float:right;
+            margin:6px 10px ;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 50px;
+        }
+        #box_btn .color1{
+            background: #FF7F50;
+        }
+        #box_btn .color2{
+            background:yellow;
+        }
+        #box_btn #deng{
+            width: 80px;
+            height: 112px;
+            line-height: 110px;
+            font-size: 30px;
+            background: #A52A2A;
+        }
+        #box_ft{
+            width: 100%;
+            height: 40px;
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 40px;
+            text-align: right;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            //加载完毕后光标自动对应到输入框
+            $('screen_ft').focus();
+            function $(tag) {
+                return document.getElementById(tag);
+            }
+            var div2=$("div2");
+            var div1=$("div1");
+            div2.onclick=function(){
+                div1.className=(div1.className=="close1")?"open1":"close1";
+                div2.className=(div2.className=="close2")?"open2":"close2";
+            };
+            var result=0;//开始结果为0
+            var btns=$('box_btn').getElementsByClassName('buttons');
+            console.log(btns[1].value);
+            for(var i=0;i<btns.length;i++){
+                btns[i].onclick=function () {
+                    $('screen_ft').value += this.value;//注意this的使用
+                }
+            }
+//            var deng=$('deng');
+            $('deng').onclick=function () {
+                $('screen_hd').value = $('screen_ft').value+'=';
+                $('screen_ft').value = eval($('screen_ft').value);
+            };
+
+            $('ocancel').onclick = function () {
+                var val=$('screen_ft');
+                $('screen_ft').value = val.value.substring(0, val.value.length - 1);
+            };
+            $('clearall').onclick = function () {
+                $('screen_ft').value = '';
+                $('screen_hd').value ='0';
+                $('screen_ft').focus();
+            };
+        }
+    </script>
+</head>
+<body>
+<div id="box">
+    <div id="box_hd">
+        <h2>欢迎使用我的计算器！</h2>
+        <div id="div1" class="open1">
+            <div id="div2" class="open2"></div>
+        </div>
+    </div>
+    <div id="cal_screen">
+        <input id="screen_hd" value="">
+        <input id="screen_ft" value="">
+    </div>
+    <div id="box_btn">
+        <input type="button" value="/" class="buttons color1">
+        <input type="button" value="*" class="buttons color1">
+        <input type="button" value="-" class="buttons color1">
+        <input type="button" value="+" class="buttons color1">
+        <input type="button" value="%" class="buttons color1">
+        <input type="button" value="9" class="buttons">
+        <input type="button" value="8" class="buttons">
+        <input type="button" value="7" class="buttons">
+        <input type="button" value="&larr;" id="ocancel" class="color2">
+        <input type="button" value="6" class="buttons">
+        <input type="button" value="5" class="buttons">
+        <input type="button" value="4" class="buttons">
+        <input type="button" value="=" id="deng">
+        <input type="button" value="3" class="buttons">
+        <input type="button" value="2" class="buttons">
+        <input type="button" value="1" class="buttons">
+        <input type="button" value="." class="buttons">
+        <input type="button" value="0" class="buttons">
+        <input type="button" value="C" id="clearall" class="color2">
+
+    </div>
+    <div id="box_ft">
+        madeBy@Jionghui Li
+        <a href="">联系方式</a>
+    </div>
+
+
+
+
+</div>
+</body>
+</html>

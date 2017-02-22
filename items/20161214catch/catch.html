@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>homework1</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            border: 0;
+            list-style: none;
+        }
+        #up{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background: #E9967A;
+        }
+        #down{
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            left: 25px;
+            top: 25px;
+            background: orange;
+        }
+        span{
+            width: 100px;
+            height: 100px;
+            display: block;
+            position: absolute;
+            background-size: cover!important;
+            border: 2px solid #ccc;
+            top:500px;
+            box-sizing: border-box;
+            transition: all 2.5s;
+            transition-delay: 2s;
+        }
+        #btn{
+            width: 100px;
+            height: 100px;
+            background: skyblue;
+            position: absolute;
+            right: 100px;
+            top: 30%;
+            font-size: 30px;
+            font-family:"微软雅黑";
+            font-weight: bold;
+        }
+    </style>
+    <script src="js/myfn1208.js"></script>
+    <script>
+        window.onload=function () {
+            var main=myfn1208.$('main');
+            var up=myfn1208.$('up');
+            var down=myfn1208.$('down');
+            var btn=myfn1208.$('btn');
+            var timer=null;
+            //打印底下盒子
+            for(var i=0;i<10;i++){
+                var sps=document.createElement('span');
+                main.appendChild(sps);
+                sps.style.left=i*110+'px';
+                sps.style.background='url("images/'+(i+1)+'.jpg")';
+            }
+            //上面盒子动起来
+            var dis=0;
+            var num=5;
+            var pan = true;
+            timer=setInterval(function () {
+                if(dis<1000&&num>0){
+                    if (pan){
+                        num =5;
+                        pan = !pan;
+                    }
+                    dis = dis+num;
+                    up.style.left=dis+'px';
+                }else {
+                    if (!pan){
+                        num = -5;
+                        pan = !pan;
+                    }
+                    dis = dis+num;
+                    up.style.left=dis+'px';
+                    if(dis<0){
+                        num =5;
+                    }
+                }
+            },10);
+            //按钮事件
+            var osp=myfn1208.gettag('span');
+            var downtimer;
+            var downtop=25;
+            var downnum=5;
+            btn.onclick=function () {
+                clearInterval(timer);
+                var upleft=down.clientWidth+up.offsetLeft;
+                for(var i=0;i<osp.length;i++){
+
+                    if(upleft>=i*110&&upleft<=((i+1)*110-5)){
+                        downtimer=setInterval(function () {
+                            if(downtop<500&&downnum>0){
+                                downnum=5;
+                                downtop=downtop+downnum;
+                                down.style.top=(downtop)+'px';
+
+                            }else{
+                                downnum=-5;
+                                downtop=downtop+downnum;
+                                down.style.top=(downtop)+'px';
+                            }
+                            if(downtop<=25){
+                                clearInterval(downtimer);
+                            }
+
+                        },20)
+                        osp[i].style.top=100+'px';
+                    }
+
+                }
+            }
+        }
+
+    </script>
+</head>
+<body id="main">
+<!--1.使用myfn工具类中的函数修改前面的事例程序,尤其是for循环-->
+<div id="up">
+    <div id="down"></div>
+</div>
+<button id="btn">开始</button>
+
+</body>
+</html>

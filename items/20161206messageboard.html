@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>homework1</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            border: 0;
+            list-style: none;
+        }
+        body{
+            font-family:"微软雅黑";
+        }
+        #mesbox{
+            width: 400px;
+            height: 500px;
+            margin: 100px auto 0;
+            border: 3px solid #000;
+        }
+        h2{
+            height: 80px;
+            line-height: 80px;
+            border-bottom: 2px solid #FAFAD2;
+            text-align: center;
+            background: #F08080;
+        }
+        h2 img{
+            width: 70px;
+            float: left;
+            margin: 5px;
+            border: 1px solid #cccccc;
+            border-radius: 50%;
+        }
+        #inputbox{
+            width: 100%;
+            height: 60px;
+            overflow: hidden;
+        }
+        #inp{
+            width: 80%;
+            height: 60px;
+            border: 3px solid #ccc;
+            box-sizing: border-box;
+            font-size: 22px;
+            float: left;
+            color: #cccccc;
+        }
+        #send{
+            width: 20%;
+            height: 60px;
+            background: #aaaaaa;
+            font-size: 22px;
+            float: left;
+        }
+        #oul li{
+            width: 400px;
+            height: 40px;
+            padding-left: 10px;
+            box-sizing: border-box;
+            line-height: 40px;
+            font-size: 18px;
+            position: relative;
+
+        }
+        #oul li:nth-child(2n+1){
+            background:#B0C4DE;
+        }
+        #oul li:nth-child(2n){
+            background: #F0E68C;
+        }
+        #oul li button{
+            background: #BA55D3;
+            width: 40px;
+            height: 30px;
+            font-size: 14px;
+            position: absolute;
+            right: 10px;
+            top: 5px;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            //抽取id函数
+            function $(tag) {
+                return document.getElementById(tag)
+            }
+            //定义变量
+            var inp=$('inp');
+            var send=$('send');
+            var oul=$('oul');
+            //光标聚焦事件
+            inp.onfocus=function () {
+                if(inp.value='想给我说点什么呢？'){
+                    inp.value='';
+                    inp.style.color='black';
+                    inp.style['font-weight']='bold';
+                }
+            }
+
+            send.onclick=function () {
+                //动态添加
+                //创建li和button
+                var oli=document.createElement('li');
+                var odel=document.createElement('button');
+                oul.appendChild(oli);
+                //替代内容
+                oli.innerHTML=inp.value;
+                inp.value='';
+                oli.appendChild(odel);
+                //删除
+                odel.innerHTML='删除';
+                odel.onclick=function () {
+//                    this.parentNode.style.display='none';//方法1display
+                    oul.removeChild(oli);
+//                    oli.removeChild(odel);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<!--1.动态用代码创建一个节点,当点击的时候删除这个节点-->
+<!--2.通过日期实现一个简单的秒表效果,只需显示秒针即可-->
+<!--3.创建一个数组，然后从大到小排序，最后，显示排序好的数组-->
+<div id="mesbox">
+    <h2><img src="images/1.png" alt="">欢迎来到我的留言板！</h2>
+    <div id="inputbox">
+        <input type="text" id="inp" value="想给我说点什么呢？">
+        <input type="button" id="send" value="Send">
+    </div>
+    <ul id="oul"></ul>
+</div>
+
+
+</body>
+</html>

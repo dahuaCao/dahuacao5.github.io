@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>小游戏：你的鼠标有多快</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            border: 0;
+            list-style: none;
+        }
+        body{
+            background: #e8e8e8;
+            font-family:"微软雅黑";
+        }
+        #screenbox{
+            width: 50%;
+            height: 550px;
+            padding-left: 31px;
+            box-sizing: border-box;
+            position: absolute;
+            left: 0;
+            top: 40px;
+        }
+        #screenbox div{
+            line-height: 40px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #show{
+            width: 500px;
+            height: 100%;
+            background: #eff7ef;
+            border: 1px solid #000;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        #fenshu{
+            width: 150px;
+            height: 80px;
+            background: skyblue;
+        }
+        #times{
+            width: 150px;
+            height: 40px;
+            background: skyblue;
+            margin-top: 50px;
+        }
+        #decbox{
+            width: 50%;
+            height: 550px;
+            position: absolute;
+            right: 0;
+            top: 40px;
+            box-sizing: border-box;
+            padding:50px 0 0 30px;
+        }
+        #decbox h2{
+            font-size: 30px;
+            line-height: 40px;
+            margin-bottom: 10px;
+        }
+        #decbox p{
+            font-size: 18px;
+            line-height: 34px;
+        }
+        #decbox button{
+            width: 200px;
+            height: 60px;
+            background: skyblue;
+            margin: 10px 30px 30px 10px;
+            font-size: 30px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+        span{
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            cursor: pointer;
+            /*background: url("img/1.png");*/
+        }
+    </style>
+    <script src="js/Underscore-min.js"></script>
+    <script src="js/Ljhfn.js"></script>
+    <script src="js/index.js"></script>
+</head>
+<body>
+<!--屏幕盒子-->
+<div id="screenbox">
+    <div id="show"></div>
+    <div id="fenshu"><strong></strong>
+        <p>得分：<strong id="st1">0分</strong></p>
+        <p>失分：<strong id="st2">0分</strong></p>
+    </div>
+    <div id="times">
+        倒计时：<strong id="st3">60秒</strong>
+    </div>
+</div>
+<!--描述盒子-->
+<div id="decbox">
+    <h2>你的鼠标有多快？</h2>
+    <p>游戏说明：</p>
+    <p>(1)点击“开始游戏”，随机掉下QQ表情，点中它，千万别让它掉下去！！</p>
+    <p>(2)你可以选择模式：标准模式、疯狂模式</p>
+    <p>(3)标准模式：在60秒内，速度一样。看你能点多少个？</p>
+    <p style="margin-bottom: 30px">(4)疯狂模式：速度加快，看你能点多少个？</p>
+    <button id="standard">标准模式开始</button><br>
+    <button id="crazy">疯狂模式开始</button>
+
+    <!--<button id="begin">开始游戏</button>-->
+</div>
+</body>
+</html>

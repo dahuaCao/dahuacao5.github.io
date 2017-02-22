@@ -1,0 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+}
+body{
+    background: #e8e8e8;
+    font-family:"微软雅黑";
+}
+#decbox{
+    width: 50%;
+    height: 550px;
+    margin: 40px 0 0 50px;
+    box-sizing: border-box;
+    padding:50px 0 0 30px;
+    font-size: 24px;
+}
+#decbox h2{
+    font-size: 30px;
+    line-height: 40px;
+    margin-bottom: 10px;
+}
+#decbox p{
+    font-size: 18px;
+    line-height: 34px;
+}
+#decbox input{
+    width: 200px;
+    height: 60px;
+    background: skyblue;
+    margin: 30px 30px 0 10px;
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 8px;
+}
+#decbox #speed{
+    background: #fff;
+    padding-left: 30px;
+    box-sizing: border-box;
+}
+#showbox{
+    width: 500px;
+    height: 500px;
+    background: #eff7ef;
+    border: 5px solid #000;
+    position: absolute;
+    right: 250px;
+    top:40px;
+}
+#score{
+    width: 150px;
+    height: 60px;
+    background: skyblue;
+    position: absolute;
+    right: 80px;
+    top: 100px;
+    font-size: 20px;
+    line-height: 60px;
+}
+#showbox table{
+    width: 100%;
+    border-collapse: collapse;
+    /*text-align: center;*/
+}
+#showbox table tr{
+    height: 20px;
+    box-sizing: content-box;
+}
+#showbox table td{
+    width: 20px;
+    border: 1px solid #ccc;
+    box-sizing: content-box;
+}
+
+.snake{
+    background: skyblue !important;
+}
+.food{
+    background: yellowgreen;
+    /*background: url("../images/0.jpg") no-repeat;*/
+}
+
+
+
+
+
+
+
+
+

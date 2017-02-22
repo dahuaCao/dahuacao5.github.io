@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计时器</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            border: 0;
+            list-style: none;
+            font-family:"微软雅黑";
+        }
+        body{
+            overflow: hidden;
+        }
+        #all{
+            width: 320px;
+            height: 500px;
+            border: 3px solid #000;
+            margin: 60px auto 0;
+            text-align: center;
+        }
+        #all h2{
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            background: /*#369445*/#6495ED;
+            color: #ffffff;
+        }
+        #cal_timer{
+            width: 100%;
+            height: 320px;
+            background: #6495ED;
+            border-bottom: 2px solid #ccc;
+            overflow: hidden;
+        }
+        #cal_timer_main{
+            width: 200px;
+            height: 200px;
+            border: 2px dashed #fff;
+            border-radius: 50%;
+            margin:50px 0 0 60px;
+            font-size: 30px;
+            position: relative;
+        }
+        #times{
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            line-height: 200px;
+            position: relative;
+            color: #ffffff;
+        }
+        #times strong{
+            position: relative;
+            top: 3px;
+            width: 40px;
+            display: inline-block;
+        }
+        #little{
+            width: 40px;
+            height: 40px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            position: absolute;
+            left: 80px;
+            bottom: 20px;
+        }
+        #littlespan{
+            width: 6px;
+            height: 40px;
+            position: absolute;
+            left: 17px;
+            top: 0;
+            background: url("images/finger.fw.png") no-repeat;
+            background-size:100% 100% ;
+        }
+        #rotatebox{
+            width: 20px;
+            height: 17px;
+            background: url("images/point.fw.png") no-repeat;
+            background-size:100% 100%;
+            position: absolute;
+            left: 90px;
+            top: -20px;
+            /*transform: rotate(180deg);*/
+            transform-origin: 10px 120px;
+        }
+        #begin{
+            width: 100px;
+            height: 50px;
+            background: #6495ED;
+            border-radius: 5px;
+            margin-top: 30px;
+            margin-right: 40px;
+            font-size: 20px;
+        }
+        #end{
+            width: 100px;
+            height: 50px;
+            background: #6495ED;
+            border-radius: 5px;
+            margin-top: 30px;
+            font-size: 20px;
+        }
+        #endtime{
+            width: 100%;
+            height: 40px;
+            margin-bottom: 10px;
+            display: inline-block;
+            position: relative;
+            top: 10px;
+        }
+        #reset{
+            width: 100px;
+            height: 50px;
+            position: absolute;
+            left: 382px;
+            top: 464px;
+            border-radius: 5px;
+            background: skyblue;
+            font-size: 20px;
+        }
+        #decbox{
+            width: 400px;
+            height: 500px;
+            position: absolute;
+            right: 80px;
+            top: 200px;
+            text-align: left !important;
+            overflow: hidden;
+        }
+        #decbox h2{
+            margin-bottom: 30px;
+        }
+        #decbox p{
+            font-size: 20px;
+            line-height: 34px;
+        }
+        #fixed{
+            background:darkred;
+            color:#fff;
+            display: block;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            position: relative;
+            position: fixed;
+            right: 100px;
+            top: 500px;
+        }
+        #fixed .ewm{
+            width: 0;
+            height: 100px;
+            display: block;
+            position: absolute;
+            right: 50px;
+            top: 0;
+            transition: all 1s;
+        }
+        #fixed:hover .ewm{
+            width:100px;
+        }
+    </style>
+</head>
+<body>
+<div id="all">
+    <h2>欢迎使用我的秒表</h2>
+    <div id="cal_timer">
+        <!--主体-->
+        <div id="cal_timer_main">
+            <div id="times">
+                <strong id="minute">0</strong>:<strong id="second">0</strong>.<strong id="haomiao">0</strong>
+                <div id="little"><span id="littlespan"></span></div>
+            </div>
+            <div id="rotatebox"></div>
+        </div>
+    </div>
+    <button id="begin">开始</button>
+    <button id="end">结束</button>
+    <h3 id="endtime"></h3>
+</div>
+
+<input type="button" value="重置" id="reset">
+<div id="decbox">
+    <h2>小工具：计时器</h2>
+    <p>使用说明：</p>
+    <p>（1）点击开始按钮，开始计时。</p>
+    <p>（2）点击结束按钮，停止计时。</p>
+    <p>（3）点击重置按钮，刷新页面。</p>
+    <p>（4）时间显示为“分：秒. 毫秒”。</p><br>
+    <h3>made by@Jionghui Li</h3>
+</div>
+<div id="fixed">联系<img src="images/ewm.jpg" alt="" class="ewm"></div>
+<script src="js/MyFunc.js"></script>
+<script>
+    window.onload=function () {
+        //获取标签
+        var rotatebox=$('rotatebox'),littlespan=$('littlespan'),minute=$('minute'),second=$('second'),haomiao=$('haomiao'),beginBtn=$('begin'),endBtn=$('end'),resetBtn=$('reset'),endtime=$('endtime'),times=$('times');
+
+        //开启定时器
+        var timer=null,ms=0,s=0,m=0;
+        beginBtn.onclick=function () {
+            clearInterval(timer);
+            timer=setInterval(function () {
+                ms++;
+                if(ms>=10){
+                    s++;
+                    ms=0;
+                    if(s>=60){
+                        m++;
+                        s=0
+                    }
+                }
+                haomiao.innerHTML=ms;
+                second.innerHTML=s;
+                minute.innerHTML=m;
+//                console.log('---');
+                rotatebox.style.transform='rotate('+6*s+'deg)';
+                littlespan.style.transform='rotate('+36*ms+'deg)';
+            },100);
+            endBtn.onclick=function () {
+                clearInterval(timer);
+                endtime.innerHTML=m+':'+s+':'+ms;
+            }
+        }
+        resetBtn.onclick=function () {
+            window.location.reload();
+        }
+    }
+</script>
+</body>
+</html>

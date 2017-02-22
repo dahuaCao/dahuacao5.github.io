@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎来到我的壁纸库</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<h2>李炯辉图库</h2>
+<div id="box">
+    <div id="meinvku">
+        <span>美女图库</span>
+        <a href="meinvku.html">
+            <ul id="Mul">
+                <li><img src="images/meinv/20.jpg" alt=""></li>
+                <li><img src="images/meinv/5.jpg" alt=""></li>
+            </ul>
+            <!--<img src="images/meinv/23.jpg" alt="">-->
+        </a>
+    </div>
+    <div id="huoyingku">
+        <span>火影图库</span>
+        <a href="huoyingku.html">
+            <ul id="Hul">
+                <li><img src="images/huoying/20.jpg" alt=""></li>
+                <li><img src="images/huoying/6.jpg" alt=""></li>
+            </ul>
+        </a>
+    </div>
+</div>
+<script src="js/Underscore-min.js"></script>
+<script src="js/Ljhfn.js"></script>
+<script>
+//    var Mul=$('Mul');
+    changepic('Mul','meinv');
+    changepic('Hul','huoying');
+
+function changepic(parent,src) {
+    var oul=$(parent);
+    var Mpic1=oul.children[0].children[0];
+    var Mpic2=oul.children[1].children[0];
+    var num=0,loop=0,newloop=0;
+    var timer=null;
+    timer=setInterval(function () {
+//        clearInterval(timer);
+        num++
+        loop=num%27;
+        newloop=loop-1;
+        var oultop=oul.offsetTop;
+        if(oultop==-170){
+            doMove(oul,'top',5,0,function () {
+                if(newloop<0){
+                newloop=27;
+            }
+            Mpic2.src='images/'+src+'/'+newloop+'.jpg';
+            });
+//
+        }else{
+            oul.style.top=-170+'px';
+            Mpic1.src='images/'+src+'/'+loop+'.jpg';
+        }
+//        console.log(oultop);
+//        var img1=document.createElement('img');
+//        img1.src='"images/'+src+'/'+_.random(0,27)+'.jpg"';
+//        li1.appendChild(img1);
+//        var img2=document.createElement('img');
+//        img2.src='"images/'+src+'/'+_.random(0,27)+'.jpg"';
+//        li2.appendChild(img2);
+
+    },2000);
+}
+</script>
+</body>
+</html>
